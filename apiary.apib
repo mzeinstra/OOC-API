@@ -83,10 +83,15 @@ Calculation calculator
                 },
                 {
                     "id": "COMMUNICATION_DATE",
-                    "question": "Communication date",
+                    "question": "What is the communication date of the work?",
                     "type": "numeric"
-
-                }
+                },
+                {
+                    "id": "EEA_NOTEEA",
+                    "question": "Operations genuinely linked with",
+                    "type": "list",
+                    "items": [ "EEA", "Not EEA" ]
+                },
             ]
         }
 
@@ -95,7 +100,9 @@ Calculation calculator
 + Request (application/json)
 
         { 
-            "CREATION_DATE": "1945" 
+            "PUBLICATION_DATE" : "1940",
+            "CREATION_DATE" : "1940",
+            "COMMUNICATION_DATE" : "1940"
         }
 
 + Response 200 (application/json)
@@ -104,9 +111,9 @@ Calculation calculator
             "calculator" : "api.outofcopyright.eu/belgium/phonogram/"
             "version" : "<commit hash?>"
             "parameters" : [
-                PUBLICATION_DATE : “1940”
-                CREATION_DATE : “1940”
-                COMMUNICATION_DATE : “1940"
+                "PUBLICATION_DATE" : "1940"
+                "CREATION_DATE" : "1940"
+                "COMMUNICATION_DATE" : "1940"
             ]
             "result" : “Out Of Copyright”
         }
