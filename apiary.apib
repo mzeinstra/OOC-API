@@ -35,7 +35,7 @@ The API for a specific country, provides a list of decision trees.
 + Parameters
     + country (required, string, ``) ... Name of the country
 
-### Retrieve a Note [GET]
+### List type of work of a given country [GET]
 + Response 200 (application/json)
 
         {
@@ -54,7 +54,7 @@ The API for a specific country, provides a list of decision trees.
 + Response 404 (application/json)
 
         {
-            errormessage : "No country at this address, please go to api.outofcopyright.eu for a full overview of our API"
+            "errormessage" : "No country at this address, please go to api.outofcopyright.eu for a full overview of our API"
         }
 
 
@@ -65,7 +65,7 @@ Calculation calculator
     + country (required, string, ``) ... Name of the country
     + category (required, string, ``) ... Name of the decision tree you want to use
 
-### Retrieve a Note [GET]
+### Retrieve parameter for a calculation [GET]
 + Response 200 (application/json)
 
         {
@@ -91,7 +91,7 @@ Calculation calculator
         }
 
 
-### Retrieve a Note [POST]
+### Send a calculation request [POST]
 + Request (application/json)
 
         { 
@@ -103,24 +103,24 @@ Calculation calculator
         {
             "calculator" : "api.outofcopyright.eu/belgium/phonogram/"
             "version" : "<commit hash?>"
-            parameters : [
+            "parameters" : [
                 PUBLICATION_DATE : “1940”
                 CREATION_DATE : “1940”
                 COMMUNICATION_DATE : “1940"
             ]
-            result : “Out Of Copyright”
+            "result" : “Out Of Copyright”
         }
 
 + Response 400 (application/json)
 
         [{
-            errormessage : "Missing information"
-            waiting_response: "COMMUNICATION_DATE"
+            "errormessage" : "Missing information"
+            "waiting_response": "COMMUNICATION_DATE"
         }]
 
 + Response 404 (application/json)
 
         [{
-            errormessage : "No calculator at this address, please go to api.outofcopyright.eu for a full overview of our API"
+            "errormessage" : "No calculator at this address, please go to api.outofcopyright.eu for a full overview of our API"
         }]
 
