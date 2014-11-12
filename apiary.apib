@@ -7,7 +7,7 @@ This is a development document of how the API of OutOfCopyright.eu could look li
 ### List all countries [GET]
 + Response 200 (application/json)
 
-        [{
+        {
             "countries": {
                 "Belgium": "http://api.outofcopyright.eu/Belgium",
                 "France": "http://api.outofcopyright.eu/France",
@@ -15,7 +15,7 @@ This is a development document of how the API of OutOfCopyright.eu could look li
                 "Luxembourg": "http://api.outofcopyright.eu/Luxembourg",
                 "Netherlands": "http://api.outofcopyright.eu/Netherlands"
             }
-        }]
+        }
 
 
 ## Countries [/{country}/]
@@ -27,7 +27,7 @@ The API for a specific country, provides a list of decision trees.
 ### Retrieve a Note [GET]
 + Response 200 (application/json)
 
-        [{
+        {
             "categories": [
                 {
                     "Phonogram": "http://api.outofcopyright.eu/Belgium/Phonogram"
@@ -42,13 +42,13 @@ The API for a specific country, provides a list of decision trees.
                     "Rights assesment AV": "http://api.outofcopyright.eu/Belgium/Rights%20assesment%20AV"
                 }
             ]
-        }]
+        }
         
 + Response 404 (application/json)
 
-        [{
+        {
             errormessage : "No country at this address, please go to api.outofcopyright.eu for a full overview of our API"
-        }]
+        }
 
 
 ## Calculator [/{country}/{category}]
@@ -61,7 +61,7 @@ Calculation calculator
 ### Retrieve a Note [GET]
 + Response 200 (application/json)
 
-        [{
+        {
             "inputs": [
                 {
                     "id": "PUBLICATION_DATE",
@@ -80,22 +80,28 @@ Calculation calculator
                     "question": "Communication date"
                 }
             ]
-        }]
+        }
 
 
 ### Retrieve a Note [POST]
 + Request (application/json)
 
-        [{ 
+        { 
             "CREATION_DATE": "1945" 
-        }]
+        }
 
 + Response 200 (application/json)
         
-        [{
-            "result" : "Public Domain"
-            "additional information" : "Please be aware that.."
-        }]
+        {
+            "calculator" : "api.outofcopyright.eu/belgium/phonogram/"
+            "version" : "<commit hash?>"
+            parameters : [
+                PUBLICATION_DATE : “1940”
+                CREATION_DATE : “1940”
+                COMMUNICATION_DATE : “1940"
+            ]
+            result : “Out Of Copyright”
+        }
 
 + Response 400 (application/json)
 
