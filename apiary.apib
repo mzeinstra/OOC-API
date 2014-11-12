@@ -120,10 +120,18 @@ Calculation calculator
 
 + Response 400 (application/json)
 
-        [{
-            "errormessage" : "Missing information"
-            "waiting_response": "COMMUNICATION_DATE"
-        }]
+        {
+            "calculator" : "api.outofcopyright.eu/belgium/phonogram/"
+            "version" : "<commit hash?>"
+            "parameters" : [
+                "PUBLICATION_DATE" : "1940"
+            ],
+            "missing_parameters" : [
+                "CREATION_DATE",
+                "COMMUNICATION_DATE"
+            ]
+            "errormessage" : “Some parameters are missing”
+        }
 
 + Response 404 (application/json)
 
