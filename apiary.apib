@@ -108,29 +108,29 @@ Calculation calculator
 + Response 200 (application/json)
         
         {
-            "calculator" : "api.outofcopyright.eu/belgium/phonogram/"
-            "version" : "<commit hash?>"
+            "calculator" : "api.outofcopyright.eu/belgium/phonogram/",
+            "version" : "<commit hash?>",
             "parameters" : [
-                "PUBLICATION_DATE" : "1940"
-                "CREATION_DATE" : "1940"
+                "PUBLICATION_DATE" : "1940",
+                "CREATION_DATE" : "1940",
                 "COMMUNICATION_DATE" : "1940"
-            ]
+            ],
             "result" : “Out Of Copyright”
         }
 
 + Response 400 (application/json)
 
         {
-            "calculator" : "api.outofcopyright.eu/belgium/phonogram/"
-            "version" : "<commit hash?>"
+            "calculator" : "api.outofcopyright.eu/belgium/phonogram/",
+            "version" : "<commit hash?>",
             "parameters" : [
                 "PUBLICATION_DATE" : "1940"
             ],
             "missing_parameters" : [
                 "CREATION_DATE",
                 "COMMUNICATION_DATE"
-            ]
-            "errormessage" : “Some parameters are missing”
+            ],
+            "errormessage" : "Some parameters are missing"
         }
 
 + Response 404 (application/json)
