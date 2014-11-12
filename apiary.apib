@@ -8,13 +8,24 @@ This is a development document of how the API of OutOfCopyright.eu could look li
 + Response 200 (application/json)
 
         {
-            "countries": {
-                "Belgium": "http://api.outofcopyright.eu/Belgium",
-                "France": "http://api.outofcopyright.eu/France",
-                "Germany": "http://api.outofcopyright.eu/Germany",
-                "Luxembourg": "http://api.outofcopyright.eu/Luxembourg",
-                "Netherlands": "http://api.outofcopyright.eu/Netherlands"
-            }
+            "countries": [
+                {
+                    "name": "Belgium",
+                    "url": "http://api.outofcopyright.eu/Belgium"
+                },
+                {
+                    "name": "France",
+                    "url": "http://api.outofcopyright.eu/France"
+                },
+                {
+                    "name": "Germany",
+                    "url": "http://api.outofcopyright.eu/Germany"
+                },
+                {
+                    "name": "Luxembourg",
+                    "url": "http://api.outofcopyright.eu/Luxembourg"
+                }
+            ]
         }
 
 
@@ -30,16 +41,12 @@ The API for a specific country, provides a list of decision trees.
         {
             "categories": [
                 {
-                    "Phonogram": "http://api.outofcopyright.eu/Belgium/Phonogram"
+                    "name": "Phonogram",
+                    "url": "http://api.outofcopyright.eu/Belgium/Phonogram"
                 },
                 {
-                    "Unoriginal Database": "http://api.outofcopyright.eu/Belgium/Unoriginal%20Database"
-                },
-                {
-                    "test": "http://api.outofcopyright.eu/Belgium/test"
-                },
-                {
-                    "Rights assesment AV": "http://api.outofcopyright.eu/Belgium/Rights%20assesment%20AV"
+                    "name": "Unoriginal Database",
+                    "url": "http://api.outofcopyright.eu/Belgium/Unoriginal%20Database"
                 }
             ]
         }
@@ -62,22 +69,23 @@ Calculation calculator
 + Response 200 (application/json)
 
         {
-            "inputs": [
+            "parameters": [
                 {
                     "id": "PUBLICATION_DATE",
+                    "question": "Publication date",
                     "additional_information": "Publication date",
-                    "type": "numeric",
-                    "question": "Publication date"
+                    "type": "numeric"
                 },
                 {
                     "id": "CREATION_DATE",
-                    "type": "numeric",
-                    "question": "Creation date"
+                    "question": "Creation date",
+                    "type": "numeric"
                 },
                 {
                     "id": "COMMUNICATION_DATE",
-                    "type": "numeric",
-                    "question": "Communication date"
+                    "question": "Communication date",
+                    "type": "numeric"
+
                 }
             ]
         }
