@@ -1,0 +1,115 @@
+FORMAT: 1A
+
+# OutOfCopyright
+Notes API is a *short texts saving* service similar to its physical paper presence on your table.
+
+# Group Notes
+Notes related resources of the **Notes API**
+
+## API Collection [/]
+### List all countries [GET]
++ Response 200 (application/json)
+
+        [{
+            "countries": {
+                "Belgium": "http://api.outofcopyright.eu/Belgium",
+                "France": "http://api.outofcopyright.eu/France",
+                "Germany": "http://api.outofcopyright.eu/Germany",
+                "Luxembourg": "http://api.outofcopyright.eu/Luxembourg",
+                "Netherlands": "http://api.outofcopyright.eu/Netherlands"
+            }
+        }]
+
+
+## Countries [/{country}/]
+The API for a specific country, provides a list of decision trees.
+
++ Parameters
+    + country (required, string, ``) ... Name of the country
+
+### Retrieve a Note [GET]
++ Response 200 (application/json)
+
+        [{
+            "categories": [
+                {
+                    "Phonogram": "http://api.outofcopyright.eu/Belgium/Phonogram"
+                },
+                {
+                    "Unoriginal Database": "http://api.outofcopyright.eu/Belgium/Unoriginal%20Database"
+                },
+                {
+                    "test": "http://api.outofcopyright.eu/Belgium/test"
+                },
+                {
+                    "Rights assesment AV": "http://api.outofcopyright.eu/Belgium/Rights%20assesment%20AV"
+                }
+            ]
+        }]
+        
++ Response 404 (application/json)
+
+        [{
+            errormessage : "No country at this address, please go to api.outofcopyright.eu for a full overview of our API"
+        }]
+
+
+## Calculator [/{country}/{category}]
+Calculation calculator
+
++ Parameters
+    + country (required, string, ``) ... Name of the country
+    + category (required, string, ``) ... Name of the decision tree you want to use
+
+### Retrieve a Note [GET]
++ Response 200 (application/json)
+
+        [{
+            "inputs": [
+                {
+                    "id": "PUBLICATION_DATE",
+                    "additional_information": "Publication date",
+                    "type": "numeric",
+                    "question": "Publication date"
+                },
+                {
+                    "id": "CREATION_DATE",
+                    "type": "numeric",
+                    "question": "Creation date"
+                },
+                {
+                    "id": "COMMUNICATION_DATE",
+                    "type": "numeric",
+                    "question": "Communication date"
+                }
+            ]
+        }]
+
+
+### Retrieve a Note [POST]
++ Request (application/json)
+
+        [{ 
+            "CREATION_DATE": "1945" 
+        }]
+
++ Response 200 (application/json)
+        
+        [{
+            "result" : "Public Domain"
+            "additional information" : "Please be aware that.."
+        }]
+
++ Response 400 (application/json)
+
+        [{
+            errormessage : "Missing information"
+            waiting_response: "COMMUNICATION_DATE"
+        }]
+
++ Response 404 (application/json)
+
+        [{
+            errormessage : "No calculator at this address, please go to api.outofcopyright.eu for a full overview of our API"
+        }]
+
