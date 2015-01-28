@@ -1,7 +1,7 @@
 FORMAT: 1A
 
 # OutOfCopyright
-This is a development document of how the API of OutOfCopyright.eu could look like.
+This document contains documentation on how the API of OutOfCopyright.eu works.
 
 ## API Collection [/]
 ### List all countries [GET]
@@ -54,7 +54,8 @@ The API for a specific country, provides a list of decision trees.
 + Response 404 (application/json)
 
         {
-            "errormessage" : "No country at this address, please go to api.outofcopyright.eu for a full overview of our API"
+            "error": 8,
+            "message": "Country not found"
         }
 
 
@@ -68,30 +69,20 @@ Calculation calculator
 ### Retrieve parameter for a calculation [GET]
 + Response 200 (application/json)
 
-        {
+         {
             "parameters": [
-                {
-                    "id": "PUBLICATION_DATE",
-                    "question": "Publication date",
-                    "additional_information": "Publication date",
-                    "type": "numeric"
+               {
+                    "id": "When_was_the_fixation_of_the_performance_first_made_public",
+                    "type": "numeric",
+                    "question": "When was the fixation of the performance first made public?",
+                    "items": null
                 },
                 {
-                    "id": "CREATION_DATE",
-                    "question": "Creation date",
-                    "type": "numeric"
-                },
-                {
-                    "id": "COMMUNICATION_DATE",
-                    "question": "What is the communication date of the work?",
-                    "type": "numeric"
-                },
-                {
-                    "id": "EEA_NOTEEA",
-                    "question": "Operations genuinely linked with",
-                    "type": "list",
-                    "items": [ "EEA", "Not EEA" ]
-                },
+                    "id": "When_did_the_performance_take_place",
+                    "type": "numeric",
+                    "question": "When did the performance take place?",
+                    "items": null
+                }
             ]
         }
 
@@ -100,41 +91,45 @@ Calculation calculator
 + Request (application/json)
 
         { 
-            "PUBLICATION_DATE" : "1940",
-            "CREATION_DATE" : "1940",
-            "COMMUNICATION_DATE" : "1940"
+            "In_what_year_was_the_phonogram_published": 1950,
+            "In_what_year_was_the_phonogram_created": 1950
         }
 
 + Response 200 (application/json)
         
         {
-            "calculator" : "api.outofcopyright.eu/belgium/phonogram/",
-            "version" : "<commit hash?>",
-            "parameters" : [
-                "PUBLICATION_DATE" : "1940",
-                "CREATION_DATE" : "1940",
-                "COMMUNICATION_DATE" : "1940"
-            ],
-            "result" : “Out Of Copyright”
+            "URL": "http://api.outofcopyright.eu/Netherlands/Phonogram",
+            "version": "50af4193cfb401cc17d6e4cbbabc8a6883330a88",
+            "parameters": {
+                "In_what_year_was_the_phonogram_published": 1950,
+                "In_what_year_was_the_phonogram_created": 1950
+            },
+            "result": "The related right of the producer of the phonogram has expired. Please note that a single item might be protected by multiple layers of rights. You may need to apply the Public Domain Calculator again to examine whether additional rights apply, such as copyright protection in any underlying literary or artistic work or performers' rights in any performance that may be fixated in the phonogram."
         }
 
 + Response 400 (application/json)
 
         {
-            "calculator" : "api.outofcopyright.eu/belgium/phonogram/",
-            "version" : "<commit hash?>",
-            "parameters" : [
-                "PUBLICATION_DATE" : "1940"
-            ],
-            "missing_parameters" : [
-                "CREATION_DATE"
-            ],
-            "errormessage" : "Some parameters are missing"
+            "URL": "http://api.outofcopyright.eu/Netherlands/Phonogram",
+            "version": "50af4193cfb401cc17d6e4cbbabc8a6883330a88",
+            "parameters": {
+                "In_what_year_was_the_phonogram_published": 1950
+            },
+            "result": {
+                "error": 1,
+                "waiting_response": "In_what_year_was_the_phonogram_created",
+                "question": "",
+                "correct_responses": "Numeric value",
+                "all_possible_responses": [
+                    "In_what_year_was_the_phonogram_communicated_to_the_public",
+                    "In_what_year_was_the_phonogram_created"
+                ]
+            }
         }
 
 + Response 404 (application/json)
 
-        [{
-            "errormessage" : "No calculator at this address, please go to api.outofcopyright.eu for a full overview of our API"
-        }]
-
+        {
+            "error": 9,
+            "message": "Type of work not found"
+        }
